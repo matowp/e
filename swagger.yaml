@@ -1,0 +1,96 @@
+---
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: eIDAS signature validation API
+  description: This API allows to validate the signatures of a posted file. It also supports zip file packages.
+  
+schemes:
+  - http
+host: localhost:8080
+basePath: /api/v1
+  
+paths:
+  /:
+    get:
+      summary: API welcome message.
+      description: Base API path to test if service is online.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: string
+            
+  /validate/:
+    post:
+      summary: Validate signed file.
+      description: Obtains a file from POST data upload and creates a list of attached (e.g. xml file attachments) or packed (e.g. zip files) files. The procedure of file extraction is repeated until all nested files are analyzed or until a certain threshold is reached. After that API checks signature validity of every listed file. The resulting report is then sent in response in an array containing each analysed file and its signature status.
+      consumes:
+        - multipart/form-data  # and/or application/x-www-form-urlencoded
+      parameters:
+        - name: file
+          in: formData
+          description: File to be analyzed
+          required: true
+          type: file  
+        - name: policy
+          in: formData
+          description: Validation policy file
+          required: false
+          type: file
+      responses:
+        200:
+          description: Signature validation was finished and the results are sent in response.
+          schema:
+            $ref: "#/definitions/Report"
+        default:
+          description: An error occured during validation.
+          
+definitions:
+  Report:
+    type: array
+    items:
+      $ref: "#/definitions/FileData"
+  FileData:
+    type: object
+    properties:
+      nazwaPliku:
+        type: string
+      plikiPodpisane:
+        type: string
+      daneCertyfikatow:
+        type: array
+        items:
+          $ref: "#/definitions/CertData"
+  CertData:
+    type: object
+    properties:
+      walidacja:
+        type: string
+      subwalidacja:
+        type: string
+      dataPodpisania:
+        type: string
+        format: date-time
+      podpisanyPrzez:
+        type: string
+      poziomCertyfikatu:
+        type: string
+      formatSygnatury:
+        type: string
+      numerSygnatury:
+        type: string
+      bledy:
+        type: array
+        items:
+          type: string
+      ostrzezenia:
+        type: array
+        items:
+          type: string
+      info:
+        type: array
+        items:
+          type: string

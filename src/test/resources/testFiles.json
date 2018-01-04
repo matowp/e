@@ -1,0 +1,21 @@
+[
+  {
+    "filePath": "src/test/resources/signatures/pades/pades.pdf",
+    "signedFile": "pades.pdf",
+    "fileCount": 1,
+    "result": "TOTAL_PASSED"
+    
+  },
+  {
+    "filePath": "src/test/resources/signatures/cades_enveloping/cades_enveloping.txt.sig",
+    "signedFile": "cades_enveloping.txt.sig",
+    "fileCount": 2,
+    "result": "TOTAL_PASSED"
+  },
+  {
+    "filePath": "src/test/resources/signatures/cades_detached/cades_detached.zip",
+    "signedFile": "nbv.txt.sig",
+    "fileCount": 4,
+    "result": "TOTAL_PASSED"
+  }
+]

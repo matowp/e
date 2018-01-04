@@ -1,0 +1,50 @@
+cache:
+  key: "$CI_BUILD_NAME/$CI_BUILD_REF_NAME"
+
+stages:
+  - build
+  - deploy_dockerhub
+  - deploy_testsite
+
+variables:
+  MAVEN_OPTS: -Dmaven.repo.local=/cache/maven.repository
+
+build:
+  stage: build
+  image: maven:3-jdk-8
+  script:
+    - mvn -B package -DskipTests
+  artifacts:
+    paths:
+      - target/*.jar
+      - target/classes/eidasProperties.yaml
+    expire_in: 1 day
+
+dockerhub:
+  stage: deploy_dockerhub
+  image: docker:latest
+  variables:
+    DOCKERHUB_NAME: $DOCKERHUB_ACCOUNTNAME/$DOCKERHUB_REPONAME
+  script:
+    - cp -a target/*.jar src/main/docker
+    - cp -a target/classes/eidasProperties.yaml src/main/docker
+    - cd src/main/docker
+    - docker build -t $DOCKERHUB_NAME:${CI_BUILD_REF:0:7} -t $DOCKERHUB_NAME:$CI_BUILD_REF_NAME .
+    - docker login -u $DOCKERHUB_ACCOUNTNAME -p $DOCKERHUB_PASSWORD
+    - docker push $DOCKERHUB_NAME:$CI_BUILD_REF_NAME
+
+docker_run:
+  environment: development
+  stage: deploy_testsite
+  image: docker:latest
+  variables:
+    DOCKERHUB_NAME: $DOCKERHUB_ACCOUNTNAME/$DOCKERHUB_REPONAME
+    CONTAINER_NAME: evs-dev
+  script:
+    - docker kill $CONTAINER_NAME || echo "Nothing to kill"
+    - docker rm $CONTAINER_NAME || echo "Nothing to remove"
+    - docker login -u $DOCKERHUB_ACCOUNTNAME -p $DOCKERHUB_PASSWORD
+    - docker run -d --name=$CONTAINER_NAME -p 8080:8080 -t $DOCKERHUB_NAME:$CI_BUILD_REF_NAME
+#  only:
+#    - develop
+
