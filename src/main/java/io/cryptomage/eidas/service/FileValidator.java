@@ -101,7 +101,7 @@ public class FileValidator {
 
 	private JSONArray validateSignature(DSSDocument document, File policy, List<File> detachedFiles) {
 		SignedDocumentValidator validator = SignedDocumentValidator.fromDocument(document);
-		validator.setCertificateVerifier(verifierProvider.getVerifier());
+		/*validator.setCertificateVerifier(verifierProvider.getVerifier());*/
 
 		setDetachedContents(validator, detachedFiles);
 
@@ -153,4 +153,5 @@ public class FileValidator {
 		}
 		validator.setDetachedContents(detachedContentsList);
 	}
+
 }

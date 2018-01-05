@@ -1,14 +1,18 @@
 package io.cryptomage.eidas.config;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.google.common.collect.Lists;
 
 import io.cryptomage.eidas.service.CertificateVerifierProvider;
 import io.cryptomage.eidas.service.EidasService;
@@ -84,6 +88,7 @@ public class EidasConfig {
 		setupFiles();
 		CertificateVerifierProvider certificateVerifierProvider = new CertificateVerifierProvider();
 		logger.info("Adding oj keystore: " + ojKeystore);
+		
 		certificateVerifierProvider.setOjKeystore(ojKeystore);
 		certificateVerifierProvider.setOjKeystorePass(ojKeystorePass);
 		logger.info("Adding tempDir: " + tempDir);
@@ -91,7 +96,7 @@ public class EidasConfig {
 		logger.info("Adding lotlUrl: " + lotlUrl);
 		certificateVerifierProvider.setLotlUrl(lotlUrl);
 		logger.info("Adding lotlCode: " + lotlCode);
-		certificateVerifierProvider.setLotlCode(lotlCode);
+		certificateVerifierProvider.setLotlUrl(lotlCode);
 		certificateVerifierProvider.setTrustedCertificates(trustedCertificates);
 		certificateVerifierProvider.setupCerts();
 
@@ -103,11 +108,14 @@ public class EidasConfig {
 		if (!dir.exists() && !dir.mkdirs()) {
 			logger.error("Couldn't create temporary folder application may not work correctly");
 		}
+		
 		List<String> trustedCertificateFiles = trustedCertificateLists.getTrustedCertificateFiles();
 		List<String> trustedCertificateNames = trustedCertificateLists.getTrustedCertificateFilesNames();
 		
-		trustedCertificates = new ArrayList<>();
-		if(trustedCertificateFiles.size() == trustedCertificateNames.size() && !trustedCertificateNames.isEmpty()) {
+		trustedCertificates = Lists.newArrayList();
+		if(trustedCertificateFiles.size() == trustedCertificateNames.size() 
+				&& CollectionUtils.isNotEmpty(trustedCertificateNames)) {
+			
 			for (int i = 0; i < trustedCertificateNames.size(); i++) {
 				File trustedCertificate = FileUtilities.createEncodedFile(trustedCertificateNames.get(i), trustedCertificateFiles.get(i), tempDir);
 				logger.info("Adding trustedCertificates: " + trustedCertificateNames);
@@ -154,6 +162,7 @@ public class EidasConfig {
 			TrustedProfileValidator trustedProfileValidator) {
 		logger.info("Setting up file validator...");
 		FileValidator fileValidator = new FileValidator();
+		
 		fileValidator.setVerifierProvider(certificateVerifierProvider);
 		logger.info("Enabled trusted profile validation: " + enableTrustedProfileValidation);
 		fileValidator.setEnableTrustedProfileValidation(Boolean.parseBoolean(enableTrustedProfileValidation));

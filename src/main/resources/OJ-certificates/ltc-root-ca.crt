@@ -1,0 +1,91 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 14096551113423497532 (0xc3a1028d09bea93c)
+    Signature Algorithm: sha1WithRSAEncryption
+        Issuer: C=PL, O=LTC Sp. z o.o., OU=Centrum Certyfikacji, CN=LTC Root CA
+        Validity
+            Not Before: Mar 19 15:03:48 2014 GMT
+            Not After : Mar 19 15:03:48 2029 GMT
+        Subject: C=PL, O=LTC Sp. z o.o., OU=Centrum Certyfikacji, CN=LTC Root CA
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:e3:51:6a:12:9e:bb:6b:d3:ac:ac:77:90:4e:ff:
+                    47:f4:5b:78:18:b7:c3:d9:97:86:05:3c:48:36:5f:
+                    11:3c:bd:cb:a0:4b:f8:95:a1:c3:d5:2c:ca:8e:65:
+                    21:05:4a:44:24:ca:ae:d4:3b:ba:c0:f2:56:86:a0:
+                    60:58:9e:1d:f4:c9:53:d4:76:2f:2c:7a:fa:2e:e6:
+                    58:33:ad:af:50:4c:fe:44:3a:18:cc:95:44:c9:0a:
+                    c7:ec:e4:3c:e0:84:82:61:d3:87:77:76:98:5f:52:
+                    3a:53:5f:1e:b5:2e:67:c6:2c:49:83:6d:7e:80:f1:
+                    61:66:e8:6e:e6:d1:e3:0c:46:bd:2e:5e:50:b5:60:
+                    88:5e:5a:ea:39:37:ce:06:73:54:87:19:88:c2:86:
+                    8c:32:0b:26:d5:b4:0e:32:45:5b:1c:3e:87:69:ec:
+                    f3:68:ce:48:c0:ad:5b:08:0e:01:0d:8a:3c:97:e6:
+                    2d:ae:93:5d:2c:7b:cb:a4:b5:40:f8:b1:f5:06:95:
+                    51:a8:13:37:07:24:5d:2a:93:5a:55:4b:9b:da:e7:
+                    96:73:7c:52:e0:63:61:e1:7a:e0:da:d0:f9:5e:34:
+                    d3:82:d6:72:15:58:48:c6:ac:02:f3:5c:fb:0f:24:
+                    86:cb:23:6c:52:f1:fb:89:65:9b:d9:58:1d:6e:fb:
+                    f4:7d
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Subject Key Identifier: 
+                B3:E8:A5:79:A8:F2:98:45:DA:79:5C:34:B9:74:9F:0E:97:7D:65:29
+            X509v3 Authority Key Identifier: 
+                keyid:B3:E8:A5:79:A8:F2:98:45:DA:79:5C:34:B9:74:9F:0E:97:7D:65:29
+
+            X509v3 Certificate Policies: 
+                Policy: Certificate Practice Statement / Kodeks Postępowania Certyfikacyjnego
+                  CPS: http://www.finn.pl/ltc-root-ca/ltc-root-ca-cps.pdf
+                  User Notice:
+                    Explicit Text: Certificate Practice Statement / Kodeks Postepowania Certyfikacyjnego
+
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+            X509v3 Key Usage: critical
+                Certificate Sign, CRL Sign
+    Signature Algorithm: sha1WithRSAEncryption
+         2e:e3:6d:db:d6:2b:f3:9b:43:25:b5:69:a0:87:38:4f:85:be:
+         5a:3d:be:f6:65:c5:3f:4e:17:b6:19:2f:2f:d4:f5:6d:a4:27:
+         f0:fd:2f:3b:50:77:df:a9:de:13:a4:f8:f6:8e:c0:91:6f:1e:
+         4d:ee:b6:98:99:12:95:3d:41:62:d8:45:f8:6a:b5:c9:2f:f4:
+         33:93:aa:a4:40:40:4b:00:29:28:af:38:33:10:25:a6:88:86:
+         a9:21:34:bd:0e:11:80:35:17:3d:0d:48:6f:c0:c4:4c:17:98:
+         8a:0f:de:56:eb:1c:2e:8e:09:8c:c7:60:98:b8:62:4f:c2:ab:
+         bc:20:d6:2d:b2:41:80:ae:05:4c:a4:63:3f:9e:8c:b4:7e:cc:
+         01:d6:67:eb:7f:b1:01:ff:51:24:1d:72:fc:ed:bf:43:4b:b7:
+         47:86:ff:f3:46:a2:0f:aa:d0:fe:74:d3:6e:43:1b:3f:5b:44:
+         40:b7:3a:9a:3b:aa:40:5d:39:b0:01:a7:fd:da:9d:32:9a:46:
+         c4:f0:6c:7e:42:97:15:5c:1b:86:13:eb:60:8b:c4:c1:d5:3a:
+         9f:10:ca:62:72:ec:c9:0b:44:90:78:ce:8d:f5:65:24:fe:08:
+         bc:1b:5d:92:e0:ff:ef:dc:16:62:88:d9:d9:88:6a:ff:2b:61:
+         e7:d6:4a:d1
+-----BEGIN CERTIFICATE-----
+MIIEVTCCAz2gAwIBAgIJAMOhAo0Jvqk8MA0GCSqGSIb3DQEBBQUAMFsxCzAJBgNV
+BAYTAlBMMRcwFQYDVQQKDA5MVEMgU3AuIHogby5vLjEdMBsGA1UECwwUQ2VudHJ1
+bSBDZXJ0eWZpa2FjamkxFDASBgNVBAMMC0xUQyBSb290IENBMB4XDTE0MDMxOTE1
+MDM0OFoXDTI5MDMxOTE1MDM0OFowWzELMAkGA1UEBhMCUEwxFzAVBgNVBAoMDkxU
+QyBTcC4geiBvLm8uMR0wGwYDVQQLDBRDZW50cnVtIENlcnR5ZmlrYWNqaTEUMBIG
+A1UEAwwLTFRDIFJvb3QgQ0EwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIB
+AQDjUWoSnrtr06ysd5BO/0f0W3gYt8PZl4YFPEg2XxE8vcugS/iVocPVLMqOZSEF
+SkQkyq7UO7rA8laGoGBYnh30yVPUdi8sevou5lgzra9QTP5EOhjMlUTJCsfs5Dzg
+hIJh04d3dphfUjpTXx61LmfGLEmDbX6A8WFm6G7m0eMMRr0uXlC1YIheWuo5N84G
+c1SHGYjChowyCybVtA4yRVscPodp7PNozkjArVsIDgENijyX5i2uk10se8uktUD4
+sfUGlVGoEzcHJF0qk1pVS5va55ZzfFLgY2HheuDa0PleNNOC1nIVWEjGrALzXPsP
+JIbLI2xS8fuJZZvZWB1u+/R9AgMBAAGjggEaMIIBFjAdBgNVHQ4EFgQUs+ileajy
+mEXaeVw0uXSfDpd9ZSkwHwYDVR0jBBgwFoAUs+ileajymEXaeVw0uXSfDpd9ZSkw
+gbIGA1UdIASBqjCBpzCBpAYKKwYBBAHUZQEBATCBlTA+BggrBgEFBQcCARYyaHR0
+cDovL3d3dy5maW5uLnBsL2x0Yy1yb290LWNhL2x0Yy1yb290LWNhLWNwcy5wZGYw
+UwYIKwYBBQUHAgIwRxpFQ2VydGlmaWNhdGUgUHJhY3RpY2UgU3RhdGVtZW50IC8g
+S29kZWtzIFBvc3RlcG93YW5pYSBDZXJ0eWZpa2FjeWpuZWdvMA8GA1UdEwEB/wQF
+MAMBAf8wDgYDVR0PAQH/BAQDAgEGMA0GCSqGSIb3DQEBBQUAA4IBAQAu423b1ivz
+m0MltWmghzhPhb5aPb72ZcU/The2GS8v1PVtpCfw/S87UHffqd4TpPj2jsCRbx5N
+7raYmRKVPUFi2EX4arXJL/Qzk6qkQEBLACkorzgzECWmiIapITS9DhGANRc9DUhv
+wMRMF5iKD95W6xwujgmMx2CYuGJPwqu8INYtskGArgVMpGM/noy0fswB1mfrf7EB
+/1EkHXL87b9DS7dHhv/zRqIPqtD+dNNuQxs/W0RAtzqaO6pAXTmwAaf92p0ymkbE
+8Gx+QpcVXBuGE+tgi8TB1TqfEMpicuzJC0SQeM6N9WUk/gi8G12S4P/v3BZiiNnZ
+iGr/K2Hn1krR
+-----END CERTIFICATE-----

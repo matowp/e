@@ -18,5 +18,6 @@ import lombok.Getter;
 @Getter
 public class TrustedCertificateListsConfig {
 	private List<String> trustedCertificateFiles = new ArrayList<> ();
-	private List<String> trustedCertificateFilesNames = new ArrayList<> (); 
+	private List<String> trustedCertificateFilesNames = new ArrayList<> ();
+	
 }

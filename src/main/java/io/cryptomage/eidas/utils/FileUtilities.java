@@ -191,6 +191,7 @@ public final class FileUtilities {
 	 */
 	public static File createEncodedFile(String fileName, String fileData, String dir) {
 		File file = new File(dir + "/" + fileName);
+		
 		byte[] data = Base64.getDecoder().decode(fileData);
 		try (OutputStream stream = new FileOutputStream(file)) {
 			stream.write(data);

@@ -131,9 +131,14 @@ public class CertificateVerifierProvider {
 	}
 
 	private TrustedListsCertificateSource setupCertificateSources() {
-		KeyStoreCertificateSource keyStoreCertificateSource = new KeyStoreCertificateSource(ojKeystore,
-				"PKCS12", ojKeystorePass);
-		job.setDssKeyStore(keyStoreCertificateSource);
+		try {
+			job.setOjContentKeyStore(new KeyStoreCertificateSource(ojKeystore,"PKCS12", ojKeystorePass));
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
 
 		TrustedListsCertificateSource certificateSource = new TrustedListsCertificateSource();
 		addCertificateToSource(certificateSource);
@@ -166,4 +171,7 @@ public class CertificateVerifierProvider {
 		OnlineOCSPSource ocspSource = new OnlineOCSPSource();
 		verifier.setOcspSource(ocspSource);
 	}
+	
+	
+	
 }
