@@ -1,18 +1,17 @@
 package io.cryptomage.eidas.report;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import eu.europa.esig.dss.validation.reports.Reports;
 import eu.europa.esig.dss.validation.reports.SimpleReport;
 import eu.europa.esig.dss.validation.reports.wrapper.CertificateWrapper;
 import eu.europa.esig.dss.validation.reports.wrapper.DiagnosticData;
 import eu.europa.esig.dss.validation.reports.wrapper.TimestampWrapper;
-import eu.europa.esig.dss.validation.reports.Reports;
 
 /**
  * Class used to generate JSONObject report from dss reports object.
@@ -94,14 +93,16 @@ public class ReportGenerator {
 		cert.put(ReportConstantStrings.SUBVALIDATION, simple.getSubIndication(signatureId));
 		cert.put(ReportConstantStrings.SIGNING_DATE, DateFormatter.getString(simple.getSigningTime(signatureId)));
 		cert.put(ReportConstantStrings.SIGNED_BY, simple.getSignedBy(signatureId));
-		cert.put(ReportConstantStrings.SIGNATURE_LEVEL, simple.getSignatureLevel(signatureId));
+		/*cert.put(ReportConstantStrings.SIGNATURE_LEVEL, simple.getSignatureLevel(signatureId));*/
 		cert.put(ReportConstantStrings.SIGNATURE_FORMAT, simple.getSignatureFormat(signatureId));
 		cert.put(ReportConstantStrings.SIGNATURE_NUMBER, i + " z " + simple.getSignaturesCount());
 		cert.put(ReportConstantStrings.ERROR, getJSONArrayFromStringList(simple.getErrors(signatureId)));
 		cert.put(ReportConstantStrings.WARNING, getJSONArrayFromStringList(simple.getWarnings(signatureId)));
 		cert.put(ReportConstantStrings.INFO, getJSONArrayFromStringList(simple.getInfo(signatureId)));
+		
 		if(diagnostic.isThereTLevel(signatureId))
 			cert.put(ReportConstantStrings.TIMESTAMP_DATA, getJSONArrayFromStringList(getTimestampData(diagnostic, signatureId)));
+		
 		cert.put(ReportConstantStrings.SUBJECT_DATA, wrapper.getCertificateDN());
 		cert.put(ReportConstantStrings.ISSUER_DATA, wrapper.getCertificateIssuerDN());
 		cert.put(ReportConstantStrings.SIGNATURE_ALGORITHM, getSignatureAlgorithm(diagnostic, signatureId));

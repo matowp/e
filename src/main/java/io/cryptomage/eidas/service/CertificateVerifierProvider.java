@@ -9,6 +9,7 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -23,6 +24,7 @@ import eu.europa.esig.dss.tsl.service.TSLValidationJob;
 import eu.europa.esig.dss.validation.CommonCertificateVerifier;
 import eu.europa.esig.dss.x509.CertificateToken;
 import eu.europa.esig.dss.x509.KeyStoreCertificateSource;
+import io.cryptomage.eidas.utils.CommonUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -85,7 +87,10 @@ public class CertificateVerifierProvider {
 		setupSources();
 		job.setLotlUrl(lotlUrl);
 		job.setLotlCode(lotlCode);
-		job.refresh();
+	/*	job.refresh();*/
+		job.initRepository();
+		
+		
 	}
 
 	/**
@@ -131,14 +136,36 @@ public class CertificateVerifierProvider {
 	}
 
 	private TrustedListsCertificateSource setupCertificateSources() {
-		KeyStoreCertificateSource keyStoreCertificateSource = new KeyStoreCertificateSource(ojKeystore,
-				"PKCS12", ojKeystorePass);
-		job.setDssKeyStore(keyStoreCertificateSource);
+		try {
+			
+			KeyStoreCertificateSource keyStoreCertificateSource = obtainKeyStoreCertifficateSource();
+			job.setOjContentKeyStore(keyStoreCertificateSource);
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
 
 		TrustedListsCertificateSource certificateSource = new TrustedListsCertificateSource();
 		addCertificateToSource(certificateSource);
 		verifier.setTrustedCertSource(certificateSource);
 		return certificateSource;
+	}
+	
+	private KeyStoreCertificateSource obtainKeyStoreCertifficateSource() throws IOException {
+		
+		KeyStoreCertificateSource keyStoreCertificateSource = null;
+		if(StringUtils.isNotEmpty(ojKeystorePass) && ojKeystore != null) {
+			
+			 keyStoreCertificateSource = new KeyStoreCertificateSource(ojKeystore,
+																	   CommonUtils.PK_CS_12, 
+																	   ojKeystorePass);
+		}else {
+			logger.warn(" ojKeystorePass is empty or ojKeyStore is null ");
+		}
+		
+		return keyStoreCertificateSource;
 	}
 	
 	private void addCertificateToSource(TrustedListsCertificateSource certificateSource) {
@@ -166,4 +193,7 @@ public class CertificateVerifierProvider {
 		OnlineOCSPSource ocspSource = new OnlineOCSPSource();
 		verifier.setOcspSource(ocspSource);
 	}
+	
+	
+	
 }
